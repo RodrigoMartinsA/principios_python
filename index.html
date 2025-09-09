@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python: Do Zero ao RAG - O Guia Interativo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Source+Code+Pro:wght@400;600&display=swap');
+        .font-code {
+            font-family: 'Source Code Pro', monospace;
+        }
+        .content-section {
+            display: none;
+        }
+        .content-section.active {
+            display: block;
+        }
+        .nav-link.active {
+            background-color: #f59e0b;
+            color: #1e293b;
+        }
+        .code-line {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .code-line:hover, .code-line.selected {
+            background-color: #334155;
+        }
+        .explanation-card {
+            display: none;
+        }
+        .explanation-card.active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-slate-800 text-white p-4 md:p-6 md:fixed md:h-full">
+            <h1 class="text-2xl font-bold text-amber-400 mb-6">Masterclass Python</h1>
+            <nav id="nav-menu" class="flex flex-row md:flex-col overflow-x-auto md:overflow-x-visible pb-4 md:pb-0">
+                <a href="#intro" class="nav-link whitespace-nowrap text-sm md:text-base active font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="intro">Introdução</a>
+                <a href="#cap1" class="nav-link whitespace-nowrap text-sm md:text-base font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="cap1">Capítulo 1</a>
+                <a href="#cap2" class="nav-link whitespace-nowrap text-sm md:text-base font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="cap2">Capítulo 2</a>
+                <a href="#cap3" class="nav-link whitespace-nowrap text-sm md:text-base font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="cap3">Capítulo 3</a>
+                <a href="#cap4" class="nav-link whitespace-nowrap text-sm md:text-base font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="cap4">Capítulo 4</a>
+                <a href="#cap5" class="nav-link whitespace-nowrap text-sm md:text-base font-medium rounded-md px-4 py-2 mb-1 mr-2 md:mr-0 transition-colors hover:bg-amber-500 hover:text-slate-900" data-target="cap5">Capítulo 5</a>
+            </nav>
+        </aside>
+
+        <main class="w-full md:ml-64 p-6 md:p-10">
+            <div id="intro" class="content-section active">
+                <div class="bg-white rounded-2xl shadow-xl p-8 text-center">
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-900">Python: Fundamentos para Imersão Dev Agentes de IA</h1>
+                    <p class="text-lg md:text-xl text-slate-600 mt-4">Uma Jornada Guiada para compreender os Fundamentos da Programação em Python da imersão</p>
+                    <div class="mt-8 border-t border-slate-200 pt-8">
+                        <h3 class="text-2xl font-bold text-slate-800">Nosso Objetivo Final</h3>
+                        <p class="mt-2 text-slate-600 max-w-2xl mx-auto">Ao final desta jornada, você será capaz de ler e compreender cada linha do código abaixo. Parece complexo agora? Em breve, fará todo o sentido.</p>
+                        <div class="bg-slate-800 text-white font-code text-left p-4 rounded-lg mt-6 max-w-2xl mx-auto text-sm">
+                            <pre><code>from typing import Dict
+
+def perguntar(pergunta: str) -> Dict:
+    docs_relacionados = retriever.invoke(pergunta)
+
+    if not docs_relacionados:
+        return {"answer": "Não sei."}
+
+    return {"answer": docs_relacionados}
+
+resposta = perguntar("Qual é a política de privacidade?")
+print("Resposta ->", resposta["answer"])
+
+# ... e muito mais ...</code></pre>
+                        </div>
+                         <button onclick="document.querySelector('.nav-link[data-target=cap1]').click()" class="mt-8 bg-amber-500 text-slate-900 font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-amber-600 transition-transform transform hover:scale-105">Começar a Aventura!</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cap1" class="content-section">
+                <h2 class="text-3xl font-bold mb-6">Capítulo 1: Os Primeiros Passos no Universo Python</h2>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Variáveis: As Caixas de Memória</h3>
+                        <p class="mt-2 text-slate-600">Em programação, usamos variáveis para guardar informações. Pense nelas como caixas com etiquetas. Você dá um nome e guarda algo dentro usando o sinal de igual (`=`).</p>
+                        <div class="mt-4 flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-8 p-4 bg-slate-50 rounded-md">
+                           <span class="font-code text-lg">saudacao</span>
+                           <span class="text-amber-500 text-2xl font-bold">=</span>
+                           <div class="border-2 border-dashed border-slate-300 p-4 rounded-lg bg-white">
+                                <span class="font-code text-lg text-slate-700">"Olá, mundo!"</span>
+                           </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Tipos de Dados: Textos e Verdades</h3>
+                        <p class="mt-2 text-slate-600">As informações possuem tipos. Os dois mais básicos que veremos são textos (strings) e valores de verdadeiro/falso (booleanos).</p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-4">
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-bold">String (str)</h4>
+                                <p class="text-sm text-slate-500">Qualquer texto entre aspas.</p>
+                                <pre class="font-code bg-slate-800 text-white p-2 rounded mt-2 text-sm"><code>resposta = "Não sei."</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Número inteiro (int)</h4>
+                                <p class="text-sm text-slate-500">Representa números inteiros, positivos ou negativos, sem casas decimais.</p>
+                                <pre class="font-code bg-slate-800 text-white p-2 rounded mt-2 text-sm"><code>idade = 42</code></pre>
+                            </div>
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Número decimal (float)</h4>
+                                <p class="text-sm text-slate-500">Representa números reais (decimais) para cálculos com frações.</p>
+                                <pre class="font-code bg-slate-800 text-white p-2 rounded mt-2 text-sm"><code>altura = 1.75</code></pre>
+                            </div>
+                             <div class="bg-slate-50 p-4 rounded-lg">
+                                <h4 class="font-bold">Booleano (bool)</h4>
+                                <p class="text-sm text-slate-500">Apenas `True` ou `False`.</p>
+                                <pre class="font-code bg-slate-800 text-white p-2 rounded mt-2 text-sm"><code>contexto_encontrado = True</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cap2" class="content-section">
+                <h2 class="text-3xl font-bold mb-6">Capítulo 2: Guardando e Organizando Dados</h2>
+                <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Listas: Coleções de Itens</h3>
+                        <p class="mt-2 text-slate-600">Uma lista (`list`) é uma coleção ordenada de itens, criada com colchetes `[]`. Ela pode guardar qualquer tipo de dado e até mesmo ficar vazia.</p>
+                         <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code>citacoes = ["Artigo 1", "Página 3"]
+citacoes_vazias = []</code></pre>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Dicionários: Informações com Etiquetas</h3>
+                        <p class="mt-2 text-slate-600">Um dicionário (`dict`) guarda pares de `chave: valor`, permitindo uma organização mais estruturada dos dados. Eles são criados com chaves `{}`.</p>
+                        <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code>resultado = {
+    "answer": "Resposta encontrada.",
+    "contexto_encontrado": True
+}</code></pre>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Métodos: Superpoderes dos Objetos</h3>
+                        <p class="mt-2 text-slate-600">Em Python, quase tudo é um "objeto" que possui ações embutidas, chamadas de métodos. Usamos um ponto (`.`) para acioná-los. Por exemplo, `.strip()` remove espaços extras de uma string.</p>
+                        <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code>texto_sujo = "   olá   "
+texto_limpo = texto_sujo.strip()
+# texto_limpo agora é "olá"</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cap3" class="content-section">
+                 <h2 class="text-3xl font-bold mb-6">Capítulo 3: Ensinando o Código a Tomar Decisões</h2>
+                 <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">A Estrutura Condicional `if`</h3>
+                        <p class="mt-2 text-slate-600">A declaração `if` permite que seu código execute ações diferentes com base em uma condição ser `True` ou `False`.</p>
+                        <div class="mt-4 p-4 bg-slate-50 rounded-lg flex flex-col items-center">
+                            <div class="font-code text-center p-2 bg-slate-200 rounded">if idade >= 18:</div>
+                            <div class="h-8 w-px bg-slate-300"></div>
+                            <div class="flex justify-around w-full">
+                                <div class="flex flex-col items-center">
+                                    <span class="text-sm font-bold text-green-600">CONDIÇÃO VERDADEIRA</span>
+                                    <div class="h-4 w-px bg-slate-300 transform -rotate-45 relative -top-1 left-8"></div>
+                                    <div class="mt-2 p-2 bg-green-100 border border-green-300 rounded text-green-800 text-sm">Executa o bloco de código</div>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                     <span class="text-sm font-bold text-red-600">CONDIÇÃO FALSA</span>
+                                     <div class="h-4 w-px bg-slate-300 transform rotate-45 relative -top-1 right-8"></div>
+                                     <div class="mt-2 p-2 bg-red-100 border border-red-300 rounded text-red-800 text-sm">Pula o bloco de código</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Comparações e Lógica</h3>
+                        <p class="mt-2 text-slate-600">Usamos `==` para verificar se dois valores são iguais e `not` para inverter um valor booleano (`True` vira `False` e vice-versa).</p>
+                        <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code># Se a lista estiver vazia (considerado False), 'not' inverte para True
+x = 10
+y = 5
+
+# Verifica se x é igual a y
+igual = (x == y)  
+print("x é igual a y?", igual)  # Saída: False
+
+# Inverte o valor booleano
+diferente = not (x == y)
+print("x é diferente de y?", diferente)  # Saída: True</code></pre>
+                    </div>
+                 </div>
+            </div>
+
+            <div id="cap4" class="content-section">
+                <h2 class="text-3xl font-bold mb-6">Capítulo 4: Criando Blocos de Código Reutilizáveis</h2>
+                 <div class="space-y-6">
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Funções: Código Organizado</h3>
+                        <p class="mt-2 text-slate-600">Uma função é um bloco de código nomeado que realiza uma tarefa. Você a "define" uma vez com `def` e pode "chamá-la" quantas vezes quiser.</p>
+                        <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code># Definindo a função
+def saudar(nome):
+    return f"Olá, {nome}!"
+
+# Chamando a função
+mensagem = saudar("Aluno")
+print(mensagem) # Resultado: Olá, Aluno!</code></pre>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Anatomia de uma Função</h3>
+                        <p class="mt-2 text-slate-600">As funções têm partes importantes: a palavra-chave `def`, um nome, parênteses para os parâmetros (entradas) e um `return` opcional para o resultado (saída).</p>
+                        <div class="font-code bg-slate-100 p-4 rounded-lg mt-4 text-slate-800 text-center">
+                            <span class="text-blue-600 font-bold">def</span>
+                            <span class="text-purple-600">nome_da_funcao</span>(<span class="text-red-600">parametro</span>):
+                            <div class="text-center ml-4"># código vai aqui</div>
+                            <span class="text-blue-600 font-bold">return</span> <span class="text-green-600">resultado</span>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-amber-600">Type Hints: Dicas de Rota</h3>
+                        <p class="mt-2 text-slate-600">Anotações como `: str` e `-> Dict` são "dicas de tipo". Elas não alteram o código, mas ajudam os humanos a entenderem que tipo de dado uma função espera receber e que tipo ela vai retornar.</p>
+                        <pre class="font-code bg-slate-800 text-white p-4 rounded mt-4 text-sm"><code>def saudar(nome: str) -> str:
+    # Esta função espera uma string e retorna uma string
+    return f"Olá, {nome}!"</code></pre>
+                    </div>
+                 </div>
+            </div>
+
+            <div id="cap5" class="content-section">
+                <h2 class="text-3xl font-bold mb-6">Capítulo 5: Desvendando o Código Final</h2>
+                <p class="mb-6 text-slate-600">Missão cumprida! Agora você tem todo o conhecimento necessário. Clique em cada linha do código abaixo para ver uma explicação detalhada sobre o que ela faz, conectando tudo o que aprendemos.</p>
+                <div class="flex flex-col lg:flex-row gap-6">
+                    <div class="w-full lg:w-1/2">
+                        <div id="interactive-code" class="bg-slate-800 text-white font-code text-sm p-4 rounded-lg shadow-2xl">
+                            <div class="code-line" data-explanation="exp1"><span class="text-slate-400">from typing import Dict</span></div>
+                            <div class="h-2"></div>
+                            <div class="code-line" data-explanation="exp2"><span class="text-blue-400">def</span> <span class="text-green-400">perguntar</span>(<span class="text-orange-400">pergunta</span>: <span class="text-cyan-400">str</span>) -> <span class="text-cyan-400">Dict</span>:</div>
+                            <div class="code-line" data-explanation="exp3">    ____docs_relacionados = retriever.invoke(pergunta)</div>
+                            <div class="h-2"></div>
+                            <div class="code-line" data-explanation="exp4">    <span class="text-blue-400">____if not</span> docs_relacionados:</div>
+                            <div class="code-line" data-explanation="exp5">        <span class="text-blue-400">________return</span> {<span class="text-red-400">"answer"</span>: <span class="text-yellow-300">"Não sei."</span>}</div>
+                            <div class="h-2"></div>
+                            <div class="code-line" data-explanation="exp6">    <span class="text-blue-400">____return</span> {<span class="text-red-400">"answer"</span>: docs_relacionados}</div>
+                            <div class="h-2"></div><br>
+                            <div class="code-line" data-explanation="exp7">resposta = perguntar(<span class="text-yellow-300">"Qual é a política de privacidade?"</span>)</div>
+                            <div class="code-line" data-explanation="exp8">print(<span class="text-yellow-300">"Resposta ->"</span>, resposta[<span class="text-yellow-300">"answer"</span>])</div>
+                        </div>
+                    </div>
+                    <div class="w-full lg:w-1/2">
+                        <div id="explanation-box" class="bg-white rounded-lg shadow-lg p-6 min-h-[200px] transition-all duration-300">
+                             <div class="explanation-card" id="exp-default">
+                                <h4 class="font-bold text-lg text-slate-700">Clique em uma linha de código</h4>
+                                <p class="text-slate-500 mt-2">Selecione uma linha à esquerda para ver a mágica acontecer e a explicação aparecer aqui.</p>
+                            </div>
+                            <div class="explanation-card" id="exp1">
+                                <h4 class="font-bold text-lg text-amber-600">Importação de Ferramentas</h4>
+                                <p class="text-slate-600 mt-2">Esta linha importa o objeto `Dict` de uma biblioteca do Python, o que nos permite usar a dica de tipo (`Type Hint`) `Dict` na definição da nossa função.</p>
+                            </div>
+                            <div class="explanation-card" id="exp2">
+                                <h4 class="font-bold text-lg text-amber-600">Definição da Função</h4>
+                                <p class="text-slate-600 mt-2"><strong>`def`</strong> inicia a definição de uma função. Ela se chama `perguntar`, espera um parâmetro `pergunta` (que deve ser uma string) e promete retornar (`->`) um dicionário (`Dict`).</p>
+                            </div>
+                            <div class="explanation-card" id="exp3">
+                                <h4 class="font-bold text-lg text-amber-600">Buscando Documentos</h4>
+                                <p class="text-slate-600 mt-2">Aqui, usamos uma ferramenta externa (`retriever`) para buscar documentos relevantes. O método `.invoke()` é chamado com a `pergunta` do usuário. O resultado é salvo na variável `docs_relacionados`.</p>
+                            </div>
+                             <div class="explanation-card" id="exp4">
+                                <h4 class="font-bold text-lg text-amber-600">Verificação de Sucesso</h4>
+                                <p class="text-slate-600 mt-2">Este é o nosso `if`. A condição `not docs_relacionados` checa se a lista de documentos está vazia. Em Python, uma lista vazia é considerada `False`, então `not` a transforma em `True`, ativando o bloco de código.</p>
+                            </div>
+                             <div class="explanation-card" id="exp5">
+                                <h4 class="font-bold text-lg text-amber-600">Retorno Padrão</h4>
+                                <p class="text-slate-600 mt-2">Se nenhum documento foi encontrado, a função para aqui e retorna (`return`) um dicionário padrão, informando que a resposta é "Não sei.".</p>
+                            </div>
+                            <div class="explanation-card" id="exp6">
+                                <h4 class="font-bold text-lg text-amber-600">Retorno com Sucesso</h4>
+                                <p class="text-slate-600 mt-2">Se a função chegou a esta linha, significa que a busca por documentos funcionou. A função retorna um dicionário onde a chave `"answer"` contém a lista de documentos encontrada.</p>
+                            </div>
+                            <div class="explanation-card" id="exp7">
+                                <h4 class="font-bold text-lg text-amber-600">Chamando a Função</h4>
+                                <p class="text-slate-600 mt-2">Esta linha mostra como usar a função `perguntar()`. Passamos a string `"Qual é a política de privacidade?"` como argumento. O dicionário que a função retorna é guardado na variável `resposta`.</p>
+                            </div>
+                            <div class="explanation-card" id="exp8">
+                                <h4 class="font-bold text-lg text-amber-600">Exibindo o Resultado</h4>
+                                <p class="text-slate-600 mt-2">Finalmente, a função `print()` exibe o resultado no console. Usamos `resposta["answer"]` para acessar o valor dentro da chave `"answer"` do dicionário que a nossa função `perguntar()` nos retornou.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const contentSections = document.querySelectorAll('.content-section');
+            const codeLines = document.querySelectorAll('.code-line');
+            const explanationCards = document.querySelectorAll('.explanation-card');
+            const explanationBox = document.getElementById('explanation-box');
+            const defaultExplanation = document.getElementById('exp-default');
+
+            function showSection(targetId) {
+                contentSections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                document.getElementById(targetId).classList.add('active');
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.dataset.target === targetId) {
+                        link.classList.add('active');
+                    }
+                });
+                window.scrollTo(0, 0);
+            }
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.dataset.target;
+                    showSection(targetId);
+                    window.history.pushState({id: targetId}, '', `#${targetId}`);
+                });
+            });
+
+            window.addEventListener('popstate', (event) => {
+                 if (event.state && event.state.id) {
+                    showSection(event.state.id);
+                } else {
+                    showSection('intro');
+                }
+            });
+
+            const initialSection = window.location.hash.substring(1) || 'intro';
+            showSection(initialSection);
+
+            defaultExplanation.classList.add('active');
+
+            codeLines.forEach(line => {
+                line.addEventListener('click', function() {
+                    const explanationId = this.dataset.explanation;
+                    
+                    codeLines.forEach(l => l.classList.remove('selected'));
+                    this.classList.add('selected');
+
+                    explanationCards.forEach(card => card.classList.remove('active'));
+                    
+                    const targetCard = document.getElementById(explanationId);
+                    if(targetCard){
+                        targetCard.classList.add('active');
+                    } else {
+                        defaultExplanation.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
